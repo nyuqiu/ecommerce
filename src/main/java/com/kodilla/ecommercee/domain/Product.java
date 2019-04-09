@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Cart {
+public class Product {
     private long id;
     private String title;
     private String content;
