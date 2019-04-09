@@ -12,8 +12,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/v1/carts")
 public class CartController {
-    @GetMapping({"id"})
-    public List<ProductDto> getProductsFromCart(@PathVariable("id") Long cartId) {
+    @GetMapping()
+    public List<ProductDto> getProductsFromCart(@RequestBody CartDto cartDto) {
         return new ArrayList<>();
     }
 
