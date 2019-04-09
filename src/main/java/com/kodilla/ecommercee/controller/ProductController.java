@@ -1,11 +1,9 @@
 package com.kodilla.ecommercee.controller;
 
+
 import com.kodilla.ecommercee.domain.dto.ProductDto;
-<<<<<<< HEAD:src/main/java/com/kodilla/ecommercee/controller/ProductController.java
-=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
->>>>>>> a9f611de421a7f84e6af4e405b0e553aeff7e9c8:src/main/java/com/kodilla/ecommercee/controller/ProductController.java
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
