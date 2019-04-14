@@ -32,9 +32,10 @@ public class CartController {
         return cartMapper.mapToCartDto(service.addProductToCart(productId, cartMapper.mapToCart(cartDto)));
     }
 
-    @PutMapping()
-    public CartDto createEmptyCart(@RequestBody CartDto cartDto) {
-        return cartMapper.mapToCartDto(service.createEmptyCart());
+    @PostMapping()
+    public CartDto createEmptyCart() {
+        CartDto newCartDto = new CartDto();
+        return cartMapper.mapToCartDto(service.createEmptyCart(cartMapper.mapToCart(newCartDto)));
     }
 
     @DeleteMapping({"id"})

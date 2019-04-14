@@ -16,6 +16,6 @@ public interface CartRepository extends CrudRepository<Cart, Long> {
 
     Cart addProductToCart(Long id, Cart cart);
 
-    Cart saveEmptyCart();
+    Cart saveEmptyCart(Cart cart);
 
 }

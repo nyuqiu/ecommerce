@@ -24,7 +24,7 @@ public class DbService {
         return cartRepository.addProductToCart(id, cart);
     }
 
-    public Cart createEmptyCart(){
-        return cartRepository.saveEmptyCart();
+    public Cart createEmptyCart(final Cart cart){
+        return cartRepository.saveEmptyCart(cart);
     }
 }
