@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain.dto;
 
 import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,6 @@ public class CartDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private User user;
     private List<Product> products = new ArrayList<>();
-
-
 }

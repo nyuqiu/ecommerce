@@ -24,7 +24,7 @@ public class CartController {
     @Autowired
     private CartMapper cartMapper;
 
-    @GetMapping()
+    @GetMapping({"id"})
     public List<ProductDto> getProductsFromCart(@PathVariable("id") Long cartId) throws CartNotFoundException {
         return productMapper.mapToProductDtoList(cartMapper.mapToCartDto(service.getProductsFromCart(cartId).orElseThrow(CartNotFoundException::new)).getProducts());
     }
@@ -35,8 +35,8 @@ public class CartController {
     }
 
     @PostMapping()
-    public void createEmptyCart() {
-        service.createCart(cartMapper.mapToCart(new CartDto()));
+    public CartDto createEmptyCart() {
+        return cartMapper.mapToCartDto(service.createCart(cartMapper.mapToCart(new CartDto())));
     }
 
     @DeleteMapping({"id"})

@@ -9,19 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="CARTS")
+@Table(name = "CARTS")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart   {
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany( targetEntity = Product.class,
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @OneToMany(targetEntity = Product.class,
             mappedBy = "cart",
             fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
