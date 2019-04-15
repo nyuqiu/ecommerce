@@ -1,5 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.controller.exception.CartNotFoundException;
+import com.kodilla.ecommercee.controller.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
@@ -23,19 +25,18 @@ public class CartController {
     private CartMapper cartMapper;
 
     @GetMapping()
-    public List<ProductDto> getProductsFromCart(@RequestBody CartDto cartDto) {
-        return productMapper.mapToProductDtoList(service.getProductsFromCart(cartMapper.mapToCart(cartDto)));
+    public List<ProductDto> getProductsFromCart(@PathVariable("id") Long cartId) throws CartNotFoundException {
+        return productMapper.mapToProductDtoList(cartMapper.mapToCartDto(service.getProductsFromCart(cartId).orElseThrow(CartNotFoundException::new)).getProducts());
     }
 
     @PutMapping({"id"})
-    public CartDto addProductToCart(@RequestBody CartDto cartDto, @PathVariable("id") Long productId) {
-        return cartMapper.mapToCartDto(service.addProductToCart(productId, cartMapper.mapToCart(cartDto)));
+    public void addProductToCart(@RequestBody CartDto cartDto, @PathVariable("id") Long productId) throws ProductNotFoundException{
+        cartMapper.mapToCartDto(service.addProductToCart(productId, cartMapper.mapToCart(cartDto)));
     }
 
     @PostMapping()
-    public CartDto createEmptyCart() {
-        CartDto newCartDto = new CartDto();
-        return cartMapper.mapToCartDto(service.createEmptyCart(cartMapper.mapToCart(newCartDto)));
+    public void createEmptyCart() {
+        service.createCart(cartMapper.mapToCart(new CartDto()));
     }
 
     @DeleteMapping({"id"})
@@ -43,8 +44,8 @@ public class CartController {
 
     }
 
-    @PostMapping()
-    public OrderDto createOrderFromCart(@RequestBody CartDto cartDto) {
+    @PostMapping({"id"})
+    public OrderDto createOrderFromCart(@PathVariable("id") Long cartId) {
         return new OrderDto();
     }
 }
