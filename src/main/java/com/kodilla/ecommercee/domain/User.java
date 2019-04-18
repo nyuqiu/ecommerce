@@ -13,11 +13,11 @@ import java.util.List;
 @Table(name = "USER")
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter(value = AccessLevel.PRIVATE)
+@Setter
 @Getter
 public class User {
 
-    @Column(name = "ID")
+    @Column(name = "USER_ID")
     @NotNull
     @Id
     @GeneratedValue
