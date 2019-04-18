@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "USER")
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
+@Setter(value = AccessLevel.PUBLIC)
 @Getter
 public class User {
 
