@@ -47,18 +47,15 @@ public class User {
     private String password;
 
     @Column(name = "IS_BLOCKED")
-    @NotNull
     private boolean isBlocked;
 
     @Column(name = "UUID")
     private String uuid;
 
     @Column(name = "BEGIN_VALIDITY_UUID")
-    @NotNull
     private LocalTime beginValidityOfUuid;
 
     @Column(name = "END_VALIDITY_UUID")
-    @NotNull
     private LocalTime endValidityOfUuid;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
