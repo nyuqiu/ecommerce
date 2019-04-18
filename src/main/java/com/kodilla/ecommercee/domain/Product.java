@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "PRODUCTS")
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter(value = AccessLevel.PRIVATE)
+@Setter(value = AccessLevel.PUBLIC)
 @Getter
 public final class Product {
 
@@ -32,7 +32,6 @@ public final class Product {
 
     @ManyToOne
     @JoinColumn(name = "CART_ID")
-    @NotNull
     private Cart cart;
 
     @ManyToOne
