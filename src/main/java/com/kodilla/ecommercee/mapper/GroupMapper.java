@@ -21,7 +21,6 @@ public class GroupMapper {
                 group.getId(),
                 group.getGroupName(),
                 group.getProducts());
-
     }
 
     public List<GroupDto> mapToGroupDtoList(final List<Group> groupList) {

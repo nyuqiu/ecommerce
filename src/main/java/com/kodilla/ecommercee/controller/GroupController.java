@@ -14,33 +14,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/groups")
 public class GroupController {
-
     @Autowired
     private GroupDbService service;
+
     @Autowired
     private GroupMapper groupMapper;
 
-    @GetMapping(value="getGroups")
-    public List<GroupDto> getGroups()
-    {
+    @GetMapping(value = "getGroups")
+    public List<GroupDto> getGroups() {
         return groupMapper.mapToGroupDtoList(service.getAllGroups());
     }
 
-    @GetMapping(value="getGroup")
-    public GroupDto getGroup(@RequestParam Long groupId) throws GroupNotFoundException
-    {
+    @GetMapping(value = "getGroup")
+    public GroupDto getGroup(@RequestParam Long groupId) throws GroupNotFoundException {
         return groupMapper.mapToGroupDto(service.getGroupById(groupId).orElseThrow(GroupNotFoundException::new));
     }
 
-    @PutMapping(value="updateGroup")
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto)
-    {
+    @PutMapping(value = "updateGroup")
+    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
         return groupMapper.mapToGroupDto(service.saveGroup(groupMapper.mapToGroup(groupDto)));
     }
 
-    @PostMapping(value="createGroup")
-    public void createGroup(@RequestBody GroupDto groupDto)
-    {
+    @PostMapping(value = "createGroup")
+    public void createGroup(@RequestBody GroupDto groupDto) {
         service.saveGroup(groupMapper.mapToGroup(groupDto));
     }
 }
