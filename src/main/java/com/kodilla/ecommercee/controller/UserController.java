@@ -24,8 +24,8 @@ public class UserController {
     }
 
     @GetMapping(value = "getUser")
-    public UserDto getUser(@RequestParam("Long id") Long id ) throws UserNotFoundException {
-        return userMapper.mapToUserDto(service.getUserById(id));
+    public UserDto getUser(@RequestParam("Long userId") Long userId) throws UserNotFoundException {
+        return userMapper.mapToUserDto(service.getUserById(userId));
     }
 
     @PostMapping(value = "createUser")
