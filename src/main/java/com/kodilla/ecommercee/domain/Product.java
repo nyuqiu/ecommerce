@@ -31,11 +31,6 @@ public final class Product {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "ORDER_ID")
-    @NotNull
-    private Order order;
-
-    @ManyToOne
     @JoinColumn(name = "CART_ID")
     @NotNull
     private Cart cart;

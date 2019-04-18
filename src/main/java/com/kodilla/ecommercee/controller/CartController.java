@@ -13,10 +13,9 @@ import java.util.List;
 @RequestMapping("/carts")
 public class CartController {
     @GetMapping(value = "getProductsFromCart")
-    public List <ProductDto> getProductsFromCart(@RequestParam Long cartID) {
-
-        List <ProductDto> res = new ArrayList <>();
-        res.add(new ProductDto(1, "test title", "test content"));
+    public List<ProductDto> getProductsFromCart(@RequestParam Long cartID) {
+        List<ProductDto> res = new ArrayList<>();
+        res.add(new ProductDto());
         return res;
     }
 
@@ -32,7 +31,6 @@ public class CartController {
 
     @DeleteMapping(value = "deleteProductFromCart")
     public void deleteProductFromCart() {
-
     }
 
     @PostMapping(value = "createOrderFromCart")
