@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class TestsOfEntityGroup {
 
     @Autowired
@@ -68,7 +69,6 @@ public class TestsOfEntityGroup {
         group.setProducts(productsNew);
 
         group2 = new Group();
-        ;
         group2.setId(2L);
         group2.setGroupName("agd");
         group2.setProducts(productsOld);
@@ -87,10 +87,6 @@ public class TestsOfEntityGroup {
         //Then
         Assert.assertEquals(2, groups.size());
         Assert.assertEquals(2500, price, 0);
-
-        //CleanUp
-        groupRepository.delete(group);
-        groupRepository.delete(group2);
     }
 
     @Test
@@ -103,10 +99,6 @@ public class TestsOfEntityGroup {
         //Then
         Assert.assertTrue(readGroups.isPresent());
         readGroups.ifPresent(group1 -> Assert.assertEquals(id, group1.getId()));
-
-        //CleanUp
-        groupRepository.delete(group);
-        groupRepository.delete(group2);
     }
 
     @Test
@@ -118,14 +110,10 @@ public class TestsOfEntityGroup {
 
         //Then
         Assert.assertEquals("computers", group.getGroupName());
-
-        //CleanUp
-        groupRepository.delete(group2);
-        groupRepository.delete(group);
     }
 
     @Test
-    public void testDELETEDeleteById() {
+    public void testDeleteById() {
 
         //When
         Long id = group.getId();
