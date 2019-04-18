@@ -1,38 +1,40 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.controller.exception.GroupNotFoundException;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
-import lombok.extern.slf4j.Slf4j;
+import com.kodilla.ecommercee.mapper.GroupMapper;
+import com.kodilla.ecommercee.service.GroupDbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequestMapping("/v1/groups")
 public class GroupController {
+    @Autowired
+    private GroupDbService service;
 
-    @GetMapping
-    public List<GroupDto> getGroups(){
-        log.info("Return all groups");
-        return new ArrayList<>();
+    @Autowired
+    private GroupMapper groupMapper;
+
+    @GetMapping(value = "getGroups")
+    public List<GroupDto> getGroups() {
+        return groupMapper.mapToGroupDtoList(service.getAllGroups());
     }
 
-    @GetMapping("{id}")
-    public GroupDto getGroup(@PathVariable("id") Long productId) {
-        log.info("Return one group");
-        return new GroupDto();
+    @GetMapping(value = "getGroup")
+    GroupDto getGroup(@RequestParam("groupId") Long groupId) throws GroupNotFoundException{
+        return groupMapper.mapToGroupDto(service.getGroupById(groupId).orElseThrow(GroupNotFoundException::new));
     }
 
-    @PutMapping
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto){
-        log.info("Updated one group");
-        return new GroupDto();
+    @PutMapping(value = "updateGroup")
+    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
+        return groupMapper.mapToGroupDto(service.saveGroup(groupMapper.mapToGroup(groupDto)));
     }
 
-    @PostMapping
-    public void createGroup(@RequestBody GroupDto groupDto){
-        log.info("Group is created");
-
+    @PostMapping(value = "createGroup")
+    public void createGroup(@RequestBody GroupDto groupDto) {
+        service.saveGroup(groupMapper.mapToGroup(groupDto));
     }
 }
