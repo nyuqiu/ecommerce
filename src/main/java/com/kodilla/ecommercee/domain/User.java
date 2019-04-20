@@ -20,7 +20,7 @@ public class User {
     @Column(name = "USER_ID")
     @NotNull
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "FIRSTNAME")
@@ -69,4 +69,6 @@ public class User {
             fetch = FetchType.EAGER
     )
     private List<Order> orders = new ArrayList<>();
+
+
 }

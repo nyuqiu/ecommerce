@@ -9,19 +9,19 @@ import java.util.List;
 
 @Setter(AccessLevel.PUBLIC)
 @Entity
-@Table(name="CARTS")
+@Table(name = "CARTS")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart   {
+public class Cart {
 
     private Long id;
     private List<Product> products = new ArrayList<>();
     private User user;
     private Order order;
 
-    @OneToMany( targetEntity = Product.class,
-                mappedBy = "cart",
-                fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Product.class,
+            mappedBy = "cart",
+            fetch = FetchType.LAZY)
     public List<Product> getProducts() {
         return products;
     }
@@ -33,7 +33,7 @@ public class Cart   {
     }
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="ORDER_ID")
+    @JoinColumn(name = "ORDER_ID")
     public Order getOrder() {
         return order;
     }
