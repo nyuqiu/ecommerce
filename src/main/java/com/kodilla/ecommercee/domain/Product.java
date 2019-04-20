@@ -1,28 +1,40 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "PRODUCTS")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Setter(value = AccessLevel.PUBLIC)
 @Getter
-public class Product {
+public final class Product {
+
+    @Column(name = "PRODUCT_ID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PRODUCT_ID")
     private Long id;
+
+    @Column(name = "TITLE")
+    @NotNull
+    private String title;
+
+    @Column(name = "CONTENT")
+    @NotNull
+    private String content;
+
+    @Column(name = "PRICE")
+    @NotNull
+    private double price;
+
     @ManyToOne
     @JoinColumn(name = "CART_ID")
     private Cart cart;
-    @ManyToMany(
-            cascade = CascadeType.ALL,
-            mappedBy = "products"
-    )
-    private List<Group> groups;
+
+    @ManyToOne
+    @JoinColumn(name="GROUP_ID")
+    private Group group;
 }

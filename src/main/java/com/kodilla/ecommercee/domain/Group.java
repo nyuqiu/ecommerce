@@ -1,8 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +8,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter(value = AccessLevel.PUBLIC)
 @Entity(name = "GROUPS")
 public class Group {
 
@@ -20,12 +19,12 @@ public class Group {
     @Column(name = "GROUP_NAME")
     private String groupName;
 
-    @Column(name = "PRODUCTS_LIST")
-    @ManyToMany
-    @JoinTable(
-            name = "JOIN_PRODUCT_GROUP",
-            joinColumns = {@JoinColumn(name = "GROUP_ID", referencedColumnName = "GROUP_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
+    @Column(name = "PRODUCT_LIST")
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     private List<Product> products;
 }

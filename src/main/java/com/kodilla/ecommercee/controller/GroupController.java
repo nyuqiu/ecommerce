@@ -1,31 +1,40 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.controller.exception.GroupNotFoundException;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
+import com.kodilla.ecommercee.mapper.GroupMapper;
+import com.kodilla.ecommercee.service.GroupDbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/groups")
 public class GroupController {
-    @GetMapping
-    public List<GroupDto> getGroups(){
-        return new ArrayList<>();
+    @Autowired
+    private GroupDbService service;
+
+    @Autowired
+    private GroupMapper groupMapper;
+
+    @GetMapping(value = "getGroups")
+    public List<GroupDto> getGroups() {
+        return groupMapper.mapToGroupDtoList(service.getAllGroups());
     }
 
-    @GetMapping("{id}")
-    public GroupDto getGroup(@PathVariable("id") Long productId) {
-        return new GroupDto();
+    @GetMapping(value = "getGroup")
+    GroupDto getGroup(@RequestParam("groupId") Long groupId) throws GroupNotFoundException{
+        return groupMapper.mapToGroupDto(service.getGroupById(groupId).orElseThrow(GroupNotFoundException::new));
     }
 
-    @PutMapping()
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto){
-        return new GroupDto();
+    @PutMapping(value = "updateGroup")
+    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
+        return groupMapper.mapToGroupDto(service.saveGroup(groupMapper.mapToGroup(groupDto)));
     }
 
-    @PostMapping(consumes = "application/json")
-    public void createGroup(@RequestBody GroupDto groupDto){
-        System.out.println("Group is created");
+    @PostMapping(value = "createGroup")
+    public void createGroup(@RequestBody GroupDto groupDto) {
+        service.saveGroup(groupMapper.mapToGroup(groupDto));
     }
 }
