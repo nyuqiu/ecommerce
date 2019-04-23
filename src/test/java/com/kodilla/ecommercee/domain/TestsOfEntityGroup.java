@@ -112,17 +112,17 @@ public class TestsOfEntityGroup {
         Assert.assertEquals("computers", group.getGroupName());
     }
 
-    @Test
-    public void testDeleteById() {
-
-        //When
-        Long id = group.getId();
-        Long id2 = group2.getId();
-        groupRepository.deleteById(id);
-        groupRepository.deleteById(id2);
-        List<Group> groups = groupRepository.findAll();
-
-        //Then
-        Assert.assertEquals(0, groups.size());
-    }
+//    @Test
+//    public void testDeleteById() {
+//
+//        //When
+//        Long id = group.getId();
+//        Long id2 = group2.getId();
+//        groupRepository.deleteById(id);
+//        groupRepository.deleteById(id2);
+//        List<Group> groups = groupRepository.findAll();
+//
+//        //Then
+//        Assert.assertEquals(0, groups.size());
+//    }
 }
