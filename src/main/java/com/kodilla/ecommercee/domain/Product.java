@@ -7,14 +7,14 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "PRODUCTS")
-@NoArgsConstructor
-@AllArgsConstructor
 @Setter(value = AccessLevel.PUBLIC)
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public final class Product {
 
-    @Column(name = "PRODUCT_ID")
     @Id
+    @Column(name = "PRODUCT_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

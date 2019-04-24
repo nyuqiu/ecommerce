@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Service
 public class GroupDbService {
+
     @Autowired
     private GroupRepository groupRepository;
 
@@ -21,7 +22,15 @@ public class GroupDbService {
         return groupRepository.findById(id);
     }
 
+    public void deleteById(final Long id) {
+        groupRepository.deleteById(id);
+    }
+
     public Group saveGroup(final Group group) {
         return groupRepository.save(group);
+    }
+
+    public Optional<Group> getGroupByName(final String groupName) {
+        return groupRepository.findByGroupName(groupName);
     }
 }
