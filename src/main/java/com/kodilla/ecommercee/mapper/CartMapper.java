@@ -12,20 +12,22 @@ public class CartMapper {
     public Cart mapToCart(final CartDto cartDto) {
         return new Cart(
                 cartDto.getId(),
+                cartDto.getProducts(),
                 cartDto.getUser(),
-                cartDto.getProducts());
+                cartDto.getOrder());
     }
 
     public CartDto mapToCartDto(final Cart cart) {
         return new CartDto(
                 cart.getId(),
                 cart.getUser(),
-                cart.getProducts());
+                cart.getProducts(),
+                cart.getOrder());
     }
 
     public List<CartDto> mapToCartDtoList(final List<Cart> cartList){
         return cartList.stream()
-                .map(t -> new CartDto(t.getId(),t.getUser(), t.getProducts()))
+                .map(t -> new CartDto(t.getId(),t.getUser(), t.getProducts(), t.getOrder()))
                 .collect(Collectors.toList());
     }
 }
