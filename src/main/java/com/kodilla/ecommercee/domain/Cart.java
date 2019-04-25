@@ -7,41 +7,29 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter(AccessLevel.PUBLIC)
 @Entity
-@Table(name="CARTS")
+@Table(name = "CARTS")
+@Setter(AccessLevel.PUBLIC)
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart   {
+public class Cart {
 
+    @Id
+    @Column(name = "CART_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private List<Product> products = new ArrayList<>();
-    private User user;
-    private Order order;
 
-    @OneToMany( targetEntity = Product.class,
-                mappedBy = "cart",
-                fetch = FetchType.LAZY)
-    public List<Product> getProducts() {
-        return products;
-    }
+    @OneToMany(targetEntity = Product.class,
+            mappedBy = "cart",
+            fetch = FetchType.LAZY)
+    private List<Product> products = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
-    public User getUser() {
-        return user;
-    }
+    private User user;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="ORDER_ID")
-    public Order getOrder() {
-        return order;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    public Long getId() {
-        return id;
-    }
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 }
