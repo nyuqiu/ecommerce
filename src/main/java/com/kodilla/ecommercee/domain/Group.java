@@ -3,28 +3,32 @@ package com.kodilla.ecommercee.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
+@Entity
+@Table(name = "PRODUCT_GROUPS")
 @Setter(value = AccessLevel.PUBLIC)
-@Entity(name = "GROUPS")
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Group {
 
     @Id
     @Column(name = "GROUP_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "GROUP_NAME")
     private String groupName;
 
-    @Column(name = "PRODUCT_LIST")
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
-    private List<Product> products;
+    @Column(name = "PRODUCT_LIST")
+    private List<Product> products = new ArrayList<>();
 }

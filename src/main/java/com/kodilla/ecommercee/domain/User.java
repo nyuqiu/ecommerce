@@ -11,16 +11,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "USER")
-@NoArgsConstructor
-@AllArgsConstructor
 @Setter(value = AccessLevel.PUBLIC)
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
-    @Column(name = "USER_ID")
-    @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "USER_ID")
+    @GeneratedValue
     private Long id;
 
     @Column(name = "FIRSTNAME")
@@ -69,6 +68,4 @@ public class User {
             fetch = FetchType.EAGER
     )
     private List<Order> orders = new ArrayList<>();
-
-
 }
