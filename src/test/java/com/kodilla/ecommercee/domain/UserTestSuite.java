@@ -2,7 +2,6 @@ package com.kodilla.ecommercee.domain;
 
 import com.kodilla.ecommercee.controller.exception.UserNotFoundException;
 import com.kodilla.ecommercee.repository.UserRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,8 +84,6 @@ public class UserTestSuite {
 
     @Test
     public void testDeleteUser() {
-        //Given
-
         //When
         userRepository.deleteById(user2.getId());
         //Then
