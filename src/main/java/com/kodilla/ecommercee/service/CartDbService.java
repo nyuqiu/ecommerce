@@ -18,8 +18,6 @@ public class CartDbService {
     private ProductRepository productRepository;
     @Autowired
     private CartRepository cartRepository;
-    @Autowired
-    private OrderRepository orderRepository;
 
     public Optional<Cart> getProductsFromCart(Long id) {
         return cartRepository.findById(id);
