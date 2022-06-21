@@ -34,7 +34,7 @@ public class TestOfEntityOrder {
                 .firstName("Adam")
                 .lastName("Nowak")
                 .birthDate(LocalDate.of(2000, 8, 8))
-                .adress("Warsaw")
+                .address("Warsaw")
                 .login("Adam")
                 .password("Adam")
                 .isBlocked(false)

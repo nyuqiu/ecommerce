@@ -32,13 +32,13 @@ public class UserTestSuite {
         user1.setFirstName("John");
         user1.setLastName("Smith");
         user1.setBirthDate(LocalDate.of(1999, 1, 1));
-        user1.setAdress("Stone road 22/2");
+        user1.setAddress("Stone road 22/2");
         user1.setLogin("smithJ");
         user1.setPassword("randomPassword");
         user2.setFirstName("Lee");
         user2.setLastName("Merlin");
         user2.setBirthDate(LocalDate.of(1987, 12, 19));
-        user2.setAdress("Wood street 1");
+        user2.setAddress("Wood street 1");
         user2.setLogin("merlinl");
         user2.setPassword("randomPassword");
         Cart cart1 = new Cart();

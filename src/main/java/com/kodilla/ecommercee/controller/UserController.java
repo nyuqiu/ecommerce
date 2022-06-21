@@ -18,12 +18,6 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private DbUserService service;
-
-    @Autowired
-    private UserMapper userMapper;
-
     @GetMapping(value = "getUsers")
     public List<UserDto> getUsers()
     {
@@ -31,8 +25,7 @@ public class UserController {
     }
 
     @GetMapping(value="getUser")
-    public UserDto getUser(@RequestParam Long id)
-    {
+    public UserDto getUser(@RequestParam Long id) throws UserNotFoundException {
         return userMapper.mapToUserDto(service.getUserById(id));
     }
 

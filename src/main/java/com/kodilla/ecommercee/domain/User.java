@@ -15,8 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @Setter(value = AccessLevel.PUBLIC)
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder(toBuilder = true)
 public class User {
 
