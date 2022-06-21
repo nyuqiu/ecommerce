@@ -33,6 +33,7 @@ public class UserMapper {
                 user.getLastName(),
                 user.getBirthDate(),
                 user.getAddress(),
+
                 user.getLogin(),
                 user.getPassword(),
                 user.isBlocked(),

@@ -28,5 +28,4 @@ public class UserDto {
     private LocalTime endValidityOfUuid;
     private Cart cart;
     private List<Order> orders;
-
 }
