@@ -9,6 +9,8 @@ import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.CartDbService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,9 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/v1/carts")
 public class CartController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartController.class);
+
     @Autowired
     private CartDbService service;
     @Autowired
@@ -27,28 +32,36 @@ public class CartController {
     @Autowired
     private OrderMapper orderMapper;
 
-    @GetMapping({"id"})
-    public List<ProductDto> getProductsFromCart(@PathVariable("id") Long cartId) throws CartNotFoundException {
-        return productMapper.mapToProductDtoList(cartMapper.mapToCartDto(service.getProductsFromCart(cartId).orElseThrow(CartNotFoundException::new)).getProducts());
+    @GetMapping(value = "getProductsFromCart")
+    public List<ProductDto> getProductsFromCart(@RequestParam("id") Long cartId) throws CartNotFoundException {
+        LOGGER.info("Return products from cart");
+        return productMapper.mapToProductDtoList(cartMapper.mapToCartDto(service.getProductsFromCart(cartId)
+                .orElseThrow(CartNotFoundException::new)).getProducts());
     }
 
-    @PutMapping({"id"})
-    public void addProductToCart(@RequestBody CartDto cartDto, @PathVariable("id") Long productId) throws ProductNotFoundException{
+    @PutMapping(value = "addProductToCart")
+    public void addProductToCart(@RequestBody CartDto cartDto,
+                                 @RequestParam("id") Long productId) throws ProductNotFoundException {
+        LOGGER.info("Add product to cart");
         cartMapper.mapToCartDto(service.addProductToCart(productId, cartMapper.mapToCart(cartDto)));
     }
 
-    @PostMapping()
+    @PostMapping(value = "createEmptyCart")
     public CartDto createEmptyCart() {
+        LOGGER.info("Create empty cart");
         return cartMapper.mapToCartDto(service.createCart(cartMapper.mapToCart(new CartDto())));
     }
 
-    @DeleteMapping({"id"})
-    public void deleteProductFromCart(@PathVariable("id") Long productId, @RequestBody CartDto cartDto) throws ProductNotFoundException{
+    @DeleteMapping(value = "deleteProductFromCart")
+    public void deleteProductFromCart(@RequestBody CartDto cartDto,
+                                      @RequestParam("id") Long productId) throws ProductNotFoundException {
+        LOGGER.info("Delete product from cart");
         service.deleteProductFromCart(productId, cartMapper.mapToCart(cartDto));
     }
 
-    @PostMapping({"id"})
-    public OrderDto createOrderFromCart(@PathVariable("id") Long cartId) throws CartNotFoundException{
+    @PostMapping(value = "createOrderFromCart")
+    public OrderDto createOrderFromCart(@RequestParam("id") Long cartId) throws CartNotFoundException {
+        LOGGER.info("Create order from cart");
         return orderMapper.mapToOrderDto(service.createOrderFromCart(cartId));
     }
 }
