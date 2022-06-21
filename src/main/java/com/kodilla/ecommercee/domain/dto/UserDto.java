@@ -19,7 +19,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
-    private String adress;
+    private String address;
     private String login;
     private String password;
     private boolean isBlocked;

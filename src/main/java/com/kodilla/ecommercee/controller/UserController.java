@@ -18,28 +18,40 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private DbUserService service;
+
+    @Autowired
+    private UserMapper userMapper;
+
     @GetMapping(value = "getUsers")
-    public List<UserDto> getUsers() {
+    public List<UserDto> getUsers()
+    {
         return userMapper.mapToUserDtoList(service.getAllUsers());
     }
 
-    @GetMapping(value = "getUser")
-    public UserDto getUser(@RequestParam("Long userId") Long userId) throws UserNotFoundException {
-        return userMapper.mapToUserDto(service.getUserById(userId));
+    @GetMapping(value="getUser")
+    public UserDto getUser(@RequestParam Long id)
+    {
+        return userMapper.mapToUserDto(service.getUserById(id));
     }
 
-    @PostMapping(value = "createUser")
-    public void createUser(@RequestBody UserDto userDto) {
+    @PostMapping(value="createUser")
+    public void createUser(@RequestBody UserDto userDto)
+    {
         service.saveUser(userMapper.mapToUser(userDto));
     }
 
-    @PutMapping(value = "generateKey")
-    public UserDto generateKey(@RequestBody UserDto userDto, @RequestParam String lastName, @RequestParam String password) {
-        return userMapper.mapToUserDto(service.generateKey(userMapper.mapToUser(userDto), lastName, password));
+    @PutMapping(value="generateKey")
+    public UserDto generateKey(@RequestBody UserDto userDto, @RequestParam String lastName, @RequestParam String password)
+    {
+        return userMapper.mapToUserDto(service.generateKey(userMapper.mapToUser(userDto),lastName, password));
+
     }
 
-    @PutMapping(value = "unblockingUser")
-    public UserDto unblockingUser(@RequestBody UserDto userDto) {
+    @PutMapping(value="unblockingUser")
+    public UserDto unblockingUser(@RequestBody UserDto userDto)
+    {
         return userMapper.mapToUserDto(service.unblockingUser(userMapper.mapToUser(userDto)));
     }
 }

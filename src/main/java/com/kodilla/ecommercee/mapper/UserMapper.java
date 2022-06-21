@@ -14,7 +14,7 @@ public class UserMapper {
                 userDto.getFirstName(),
                 userDto.getLastName(),
                 userDto.getBirthDate(),
-                userDto.getAdress(),
+                userDto.getAddress(),
                 userDto.getLogin(),
                 userDto.getPassword(),
                 userDto.isBlocked(),
@@ -32,7 +32,8 @@ public class UserMapper {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getBirthDate(),
-                user.getAdress(),
+                user.getAddress(),
+
                 user.getLogin(),
                 user.getPassword(),
                 user.isBlocked(),
@@ -45,7 +46,7 @@ public class UserMapper {
 
     public List<UserDto> mapToUserDtoList(final List<User> userList) {
         return userList.stream()
-                .map(t -> new UserDto(t.getId(), t.getFirstName(), t.getLastName(), t.getBirthDate(), t.getAdress(), t.getLogin(), t.getPassword(), t.isBlocked(), t.getUuid(), t.getBeginValidityOfUuid(), t.getEndValidityOfUuid(), t.getCart(), t.getOrders()))
+                .map(t -> new UserDto(t.getId(), t.getFirstName(), t.getLastName(), t.getBirthDate(), t.getAddress(), t.getLogin(), t.getPassword(), t.isBlocked(), t.getUuid(), t.getBeginValidityOfUuid(), t.getEndValidityOfUuid(), t.getCart(), t.getOrders()))
                 .collect(Collectors.toList());
     }
 }

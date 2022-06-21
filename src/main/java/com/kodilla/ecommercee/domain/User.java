@@ -11,6 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "USER")
+@NoArgsConstructor
+@AllArgsConstructor
 @Setter(value = AccessLevel.PUBLIC)
 @Getter
 @AllArgsConstructor
@@ -35,8 +37,8 @@ public class User {
     @NotNull
     private LocalDate birthDate;
 
-    @Column(name = "ADRESS")
-    private String adress;
+    @Column(name = "ADDRESS")
+    private String address;
 
     @Column(name = "LOGIN")
     @NotNull

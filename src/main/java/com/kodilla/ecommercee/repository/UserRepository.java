@@ -20,7 +20,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Override
     User save(User user);
-
-    @Override
-    void deleteById (Long id);
 }
